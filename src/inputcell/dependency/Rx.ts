@@ -1,7 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 import { Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
-import { ReduxStore } from 'reactive-rx-redux-js';
+import { ReduxStore, RxReducer } from 'reactive-rx-redux-js';
 import { Data } from 'react-base-utilities-js';
 import * as Base from './base';
 
@@ -10,6 +10,7 @@ export namespace Action {
    * Action for rx store-based view model.
    */
   export interface Type extends Base.Action.Type {
+    valueStream(input: Data.Input.Type): Try<Observable<Nullable<string>>>;
     valueTrigger(input: Data.Input.Type): Try<Observer<Nullable<string>>>;
   }
 
@@ -18,6 +19,28 @@ export namespace Action {
    */
   export interface ProviderType {
     inputCell: Type;
+  }
+}
+
+export namespace Reducer {
+  /**
+   * Create default reducers for an input.
+   * @param {Action.ProviderType} action An action provider instance.
+   * @param {Data.Input.Type} input An input instance.
+   * @returns {Observable<RxReducer<any>>[]} An Array of Observable.
+   */
+  export function createDefault(action: Action.ProviderType, input: Data.Input.Type): Observable<RxReducer<any>>[] {
+    let selector = action.inputCell;
+
+    let reducer1: Observable<RxReducer<any>> = selector.valueStream(input)
+      .zipWith(selector.fullValuePath(input), (v1, v2) => {
+        return ReduxStore.Rx.createReducer(v1, (state, val) => {
+          return state.updatingValue(v2, val.value);
+        });
+      })
+      .getOrElse(Observable.empty());
+
+    return [reducer1];
   }
 }
 

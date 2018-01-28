@@ -129,6 +129,7 @@ export namespace ViewModel {
    */
   export interface Type extends MVVM.ViewModel.ReduxType {
     inputItem: Readonly<Data.Input.Type>;
+    inputStream(): Observable<Try<string>>;
     triggerInput(input: Nullable<string>): void;
     inputValueForState(state: Readonly<Nullable<S.Self<any>>>): Try<string>;
   }
@@ -167,6 +168,10 @@ export namespace ViewModel {
       } catch (e) {
         return Observable.of(Try.failure(e));
       }
+    }
+
+    public inputStream = (): Observable<Try<string>> => {
+      return this.model.inputStream();
     }
 
     public triggerInput = (input: Nullable<string>): void => {
