@@ -2,16 +2,16 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { Try } from 'javascriptutilities';
 import { Connector } from 'react-base-utilities-js';
-import { Component as BaseComponent } from './../base';
+import * as Base from './../base';
 import { Identity } from './Dependency';
 
 export namespace Props {
   /**
    * Prop type for input cell.
    * @extends {React.Attributes} React attributes extension.
-   * @extends {BaseComponent.Props.Type} Base component props extension.
+   * @extends {Base.Component.Props.Type} Base component props extension.
    */
-  export interface Type extends React.Attributes, BaseComponent.Props.Type {
+  export interface Type extends React.Attributes, Base.Component.Props.Type {
     identity: Readonly<Identity.ProviderType>;
   }
 }
@@ -29,9 +29,9 @@ export let createDefault = (props: Props.Type): JSX.Element => {
 /**
  * Use this component to handle web-based inputs. Common functionalities are
  * provided by the base component.
- * @extends {BaseComponent.Self} Base Component extension.
+ * @extends {Base.Component.Self} Base Component extension.
  */
-export class Self extends BaseComponent.Self<Props.Type> {
+export class Self extends Base.Component.Self<Props.Type> {
   /**
    * Handle text inputs by triggering state update.
    * @param {ChangeEvent<HTMLInputElement>} e Change event.

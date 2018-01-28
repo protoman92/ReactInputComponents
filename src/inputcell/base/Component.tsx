@@ -26,7 +26,7 @@ export abstract class Self<P extends Props.Type> extends Component<P,S.Self<any>
     return 'Input cell';
   }
 
-  public readonly viewModel: ViewModel.Type;
+  protected readonly viewModel: ViewModel.Type;
   private readonly subscription: Subscription;
 
   public constructor(props: P) {
@@ -55,7 +55,7 @@ export abstract class Self<P extends Props.Type> extends Component<P,S.Self<any>
    * Handle text input from the input cell. 
    * @param {Nullable<string>} input A string value.
    */
-  public handleTextInput = (input: Nullable<string>): void => {
+  protected handleTextInput = (input: Nullable<string>): void => {
     this.viewModel.triggerInput(input);
   }
 
@@ -63,7 +63,7 @@ export abstract class Self<P extends Props.Type> extends Component<P,S.Self<any>
    * Get the current input value.
    * @returns {string} A string value.
    */
-  public currentInputValue = (): string => {
+  protected currentInputValue = (): string => {
     return this.viewModel.inputValueForState(this.state).getOrElse('');
   }
 

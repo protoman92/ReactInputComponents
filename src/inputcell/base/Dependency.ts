@@ -35,7 +35,7 @@ export namespace Model {
    * Provide model for different input items.
    */
   export interface ProviderType {
-    inputCell_model(item: Data.Input.Type): Try<Type>;
+    inputCell_model(item: Data.Input.Type): Type;
   }
 
   /**
@@ -120,7 +120,7 @@ export namespace ViewModel {
    * Provide view model for input field component.
    */
   export interface ProviderType {
-    inputCell_viewModel(item: Data.Input.Type): Try<Type>;
+    inputCell_viewModel(item: Data.Input.Type): Type;
   }
 
   /**
