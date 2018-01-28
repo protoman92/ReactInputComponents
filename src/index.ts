@@ -1,2 +1,3 @@
 import * as InputCell from './inputcell';
-export { InputCell };
+import * as InputList from './inputlist';
+export { InputCell, InputList };

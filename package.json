@@ -8,7 +8,7 @@
   "scripts": {
     "setup": "npm install",
     "build": "tsc",
-    "test": "tsc && jest --coverage",
+    "test": "tsc && jest --coverage --forceExit",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
