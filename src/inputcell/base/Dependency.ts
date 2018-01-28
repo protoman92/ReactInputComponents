@@ -117,7 +117,7 @@ export namespace Model {
 
 export namespace ViewModel {
   /**
-   * Provide view model for input cell.
+   * Provide view model for input field component.
    */
   export interface ProviderType {
     inputCell_viewModel(item: Data.Input.Type): Try<Type>;
@@ -163,7 +163,7 @@ export namespace ViewModel {
       try {
         let substatePath = this.model.inputSubstatePath.getOrThrow();
 
-        return this.provider.store.stateStream()
+        return this.provider.store.stateStream()          
           .map(v => v.substateAtNode(substatePath));
       } catch (e) {
         return Observable.of(Try.failure(e));

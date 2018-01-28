@@ -3,7 +3,7 @@ import { Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
 import { DispatchReducer, ReduxStore as Store, ReduxStore } from 'reactive-rx-redux-js';
 import { Data } from 'react-base-utilities-js';
-import * as Base from './base';
+import * as Base from './../base';
 
 export type ActionType<T> = Store.Dispatch.Action.Type<T>;
 
@@ -44,7 +44,7 @@ export namespace Action {
    * @param {Base.Action.Type} base A base action instance.
    * @returns {CreatorType} A CreatorType instance.
    */
-  export let createDefault = (base: Base.Action.Type): CreatorType => {
+  export function createDefault(base: Base.Action.Type): CreatorType {
     return {
       ...base,
       createUpdateAction: (path: string, value: Nullable<string>) => {
@@ -55,7 +55,7 @@ export namespace Action {
         };
       },
     };
-  };
+  }
 }
 
 export namespace Reducer {

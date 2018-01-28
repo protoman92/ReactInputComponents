@@ -3,7 +3,7 @@ import { Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
 import { ReduxStore, RxReducer } from 'reactive-rx-redux-js';
 import { Data } from 'react-base-utilities-js';
-import * as Base from './base';
+import * as Base from './../base';
 
 export namespace Action {
   /**
