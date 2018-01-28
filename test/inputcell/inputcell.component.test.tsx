@@ -59,7 +59,7 @@ describe('Input cell component should work correctly', () => {
       identity: () => Try.success({
         className: 'input',
         id: undefined,
-        type: Data.InputType.Case.text,
+        type: Data.InputType.Web.Case.text,
       }),
     };
 

@@ -17,6 +17,7 @@ export namespace Props {
 /**
  * Use this component to handle multiple inputs.
  * @extends {Component<PropType,State.Self<any>>} Component extension.
+ * @template P Props type generics.
  */
 export abstract class Self<P extends Props.Type> extends Component<P,State.Self<any>> {
   public static get displayName(): string {

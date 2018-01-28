@@ -1,4 +1,4 @@
-import { Nullable, Try } from 'javascriptutilities';
+import { Nullable } from 'javascriptutilities';
 import { Data, MVVM } from 'react-base-utilities-js';
 import * as InputCell from './../../inputcell';
 
@@ -16,7 +16,7 @@ export namespace Model {
    * Provide model for input list.
    */
   export interface ProviderType  {
-    inputList_model(inputs: Data.Input.Type[]): Try<Type>;
+    inputList_model(inputs: Data.Input.Type[]): Type;
   }
 
   /**
@@ -53,7 +53,7 @@ export namespace ViewModel {
    * Provide view model for an input list component.
    */
   export interface ProviderType {
-    inputList_viewModel(inputs: Data.Input.Type[]): Try<Type>;
+    inputList_viewModel(inputs: Data.Input.Type[]): Type;
   }
 
   /**

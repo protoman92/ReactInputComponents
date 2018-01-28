@@ -7,7 +7,7 @@ export namespace Identity {
    * @extends {Component.Web.Identity.Type} Common identity extension.
    */
   export interface Type extends Component.Web.Identity.Type {
-    type: Data.InputType.Case;
+    type: Data.InputType.Web.Case;
   }
 
   /**
