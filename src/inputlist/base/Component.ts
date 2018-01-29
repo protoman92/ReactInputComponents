@@ -16,10 +16,10 @@ export namespace Props {
 
 /**
  * Use this component to handle multiple inputs.
- * @extends {Component<PropType,State.Self<any>>} Component extension.
+ * @extends {Component<PropType, State.Self<any>>} Component extension.
  * @template P Props type generics.
  */
-export abstract class Self<P extends Props.Type> extends Component<P,State.Self<any>> {
+export abstract class Self<P extends Props.Type> extends Component<P, State.Self<any>> {
   public static get displayName(): string {
     return 'Input list';
   }
@@ -47,7 +47,7 @@ export abstract class Self<P extends Props.Type> extends Component<P,State.Self<
   protected abstract createInputCell(input: Data.Input.Type): JSX.Element;
 
   /**
-   * Create input cell components. 
+   * Create input cell components.
    * @returns {JSX.Element[]} An Array of JSX Elements.
    */
   protected createInputCells(): JSX.Element[] {

@@ -1,3 +1,4 @@
 import * as InputCell from './inputcell';
 import * as InputList from './inputlist';
-export { InputCell, InputList };
+import * as InputForm from './inputform';
+export { InputCell, InputList, InputForm };

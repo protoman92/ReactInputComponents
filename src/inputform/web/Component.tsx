@@ -31,7 +31,7 @@ export let createDefault = (props: Props.Type): JSX.Element => {
  * Input form component.
  * @extends {Base.Component.Self<Props.Type>} Base Component extension.
  */
-export class Self extends Base.Component.Self<Props.Type> {  
+export class Self extends Base.Component.Self<Props.Type> {
   /**
    * Handle login button click.
    * @param {MouseEvent<HTMLButtonElement>} _e Click event.

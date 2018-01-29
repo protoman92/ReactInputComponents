@@ -1,3 +1,4 @@
 import * as Base from './base';
+import { Dispatch, Rx } from './dependency';
 import * as Web from './web';
-export { Base, Web };
+export { Base, Dispatch, Web, Rx };

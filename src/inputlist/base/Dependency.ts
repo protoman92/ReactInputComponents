@@ -21,7 +21,7 @@ export namespace Model {
 
   /**
    * Base model for an input list view model.
-   * @extends {IInputCell.Base.Model.ProviderType} Input cell model provider 
+   * @extends {IInputCell.Base.Model.ProviderType} Input cell model provider
    * extension.
    */
   export interface Type extends InputCell.Base.Model.ProviderType {
@@ -59,7 +59,7 @@ export namespace ViewModel {
   /**
    * View model for an input list component.
    * @extends {MVVM.ViewModel.Type} View model extension.
-   * @extends {InputCell.Base.ViewModel.ProviderType} Input cell VM provider 
+   * @extends {InputCell.Base.ViewModel.ProviderType} Input cell VM provider
    * extension.
    */
   export interface Type extends MVVM.ViewModel.Type, InputCell.Base.ViewModel.ProviderType {

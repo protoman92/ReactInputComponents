@@ -16,10 +16,10 @@ export namespace Props {
 
 /**
  * Input form component.
- * @extends {Component<P.Self<any>>} Component implementation.
+ * @extends {Component<P, Self<any>>} Component implementation.
  * @template P Props type generics.
  */
-export abstract class Self<P extends Props.Type> extends Component<P,State.Self<any>> {
+export abstract class Self<P extends Props.Type> extends Component<P, State.Self<any>> {
   public static get displayName(): string {
     return 'Input form';
   }

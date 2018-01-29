@@ -123,7 +123,7 @@ export namespace Model {
       let provider = this.provider;
       let action = provider.action.inputCell;
       let actionTrigger = provider.store.actionTrigger();
-      
+
       return this.fullInputValuePath
         .map(v => actionTrigger.mapObserver<Nullable<string>>(v1 => {
           return action.createUpdateAction(v, v1);

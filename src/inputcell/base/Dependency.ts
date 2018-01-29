@@ -107,7 +107,7 @@ export namespace Model {
 
     public inputValueForState = (state: Readonly<Nullable<S.Self<any>>>): Try<string> => {
       let path = this.inputValuePath;
-      
+
       return Try.unwrap(state)
         .zipWith(path, (v1, v2) => v1.stringAtNode(v2))
         .flatMap(v => v);
@@ -153,7 +153,7 @@ export namespace ViewModel {
 
     public constructor(provider: Provider.Type, model: Model.Type) {
       this.provider = provider;
-      this.model = model; 
+      this.model = model;
     }
 
     public initialize = (): void => {};
@@ -163,7 +163,7 @@ export namespace ViewModel {
       try {
         let substatePath = this.model.inputSubstatePath.getOrThrow();
 
-        return this.provider.store.stateStream()          
+        return this.provider.store.stateStream()
           .map(v => v.substateAtNode(substatePath));
       } catch (e) {
         return Observable.of(Try.failure(e));

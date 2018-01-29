@@ -5,12 +5,12 @@ import { Data } from 'react-base-utilities-js';
 import { InputCell } from './../../src';
 
 describe('Input cell view model should be implemented correctly', () => {
-  var dispatchStore: Store.Dispatch.Self;
-  var rxStore: Store.Rx.Self;
-  var dispatchProvider: InputCell.Dispatch.Provider.Type;
-  var rxProvider: InputCell.Rx.Provider.Type;
-  var dispatchModel: InputCell.Dispatch.Model.Type;
-  var rxModel: InputCell.Rx.Model.Type;
+  let dispatchStore: Store.Dispatch.Self;
+  let rxStore: Store.Rx.Self;
+  let dispatchProvider: InputCell.Dispatch.Provider.Type;
+  let rxProvider: InputCell.Rx.Provider.Type;
+  let dispatchModel: InputCell.Dispatch.Model.Type;
+  let rxModel: InputCell.Rx.Model.Type;
 
   beforeEach(() => {
     let input: Data.Input.Type = { id: 'fvp', placeholder: undefined };

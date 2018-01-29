@@ -55,13 +55,12 @@ export namespace ViewModel {
   /**
    * View model for an input form component.
    * @extends {MVVM.Confirm.ViewModel.Type} Confirm VM extension.
-   * @extends {InputList.Base.ViewModel.ProviderType} Input list VM provider 
+   * @extends {InputList.Base.ViewModel.ProviderType} Input list VM provider
    * extension.
    */
-  export interface Type extends 
+  export interface Type extends
     MVVM.Confirm.ViewModel.Type,
-    InputList.Base.ViewModel.ProviderType
-  {
+    InputList.Base.ViewModel.ProviderType {
     inputHeader: Readonly<Data.Input.Header>;
     triggerConfirm(): void;
   }

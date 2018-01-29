@@ -8,11 +8,11 @@ let timeout = 10;
 
 describe('Input list view model should be implemented correctly', () => {
   let times = 100;
-  var inputs: Data.Input.Type[];
-  var dispatchProvider: InputList.Dispatch.Provider.Type;
-  var rxProvider: InputList.Rx.Provider.Type;
-  var dispatchModel: InputList.Dispatch.Model.Type;
-  var rxModel: InputList.Rx.Model.Type;
+  let inputs: Data.Input.Type[];
+  let dispatchProvider: InputList.Dispatch.Provider.Type;
+  let rxProvider: InputList.Rx.Provider.Type;
+  let dispatchModel: InputList.Dispatch.Model.Type;
+  let rxModel: InputList.Rx.Model.Type;
 
   beforeEach(() => {
     inputs = Numbers.range(0, times).map(i => ({ id: '' + i, placeholder: undefined }));
@@ -69,7 +69,7 @@ describe('Input list view model should be implemented correctly', () => {
     let inputCellVMs = inputs.map(v => viewModel.inputCell_viewModel(v));
     let inputResults: string[] = [];
     let inputSequence = Numbers.range(0, times).map(() => Strings.randomString(100));
-    
+
     Observable.from(inputCellVMs)
       .flatMap((v, i) => v.inputStream()
         .mapNonNilOrEmpty(v1 => v1)

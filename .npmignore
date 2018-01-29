@@ -6,3 +6,10 @@ coverage
 package-lock.json
 /src
 /test
+/InputDemoNative
+.expo/
+npm-debug.*
+/App.tsx
+/app.json
+.watchmanconfig
+.babelrc

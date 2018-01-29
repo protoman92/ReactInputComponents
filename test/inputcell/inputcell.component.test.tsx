@@ -11,7 +11,7 @@ import { InputCell } from './../../src';
 type BaseProps = InputCell.Base.Component.Props.Type;
 
 describe('Input cell component should work correctly', () => {
-  var viewModel: InputCell.Base.ViewModel.Type;
+  let viewModel: InputCell.Base.ViewModel.Type;
 
   beforeEach(() => {
     let input: Data.Input.Type = { id: 'fvp', placeholder: undefined };
@@ -50,7 +50,7 @@ describe('Input cell component should work correctly', () => {
         rendered.update();
         let inputComponent = inputSelector(rendered);
         let props = inputComponent.props();
-        expect(props['value']).toBe(v);
+        expect(props.value).toBe(v);
       });
   }
 
