@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ListRenderItemInfo } from 'react-native';
 import { Component, Data } from 'react-base-utilities-js';
 import * as InputCell from './../../inputcell';
 import * as Base from './../base';
@@ -39,11 +39,11 @@ export class Self extends Base.Component.Self<Props.Type> {
 
   /**
    * Render item for a list view.
-   * @param {Data.Input.Type} item An input item.
+   * @param {ListRenderItemInfo<Data.Input.Type>} item An input item.
    * @returns {JSX.Element} A JSX Element instance.
    */
-  private renderItem = (item: Data.Input.Type): JSX.Element => {
-    let vm = this.viewModel.inputCell_viewModel(item);
+  private renderItem = (item: ListRenderItemInfo<Data.Input.Type>): JSX.Element => {
+    let vm = this.viewModel.inputCell_viewModel(item.item);
     return this.createInputCell(vm);
   }
 
@@ -52,8 +52,9 @@ export class Self extends Base.Component.Self<Props.Type> {
     let inputs = viewModel.inputItems.map(v => v);
 
     return <FlatList
-      data={...inputs}
+      data={inputs}
       keyExtractor={this.keyExtractor.bind(this)}
-      renderItem={this.renderItem.bind(this)}/>;
+      renderItem={this.renderItem.bind(this)}
+      style={this.props.style.inputList.style(inputs).value}/>;
   }
 }

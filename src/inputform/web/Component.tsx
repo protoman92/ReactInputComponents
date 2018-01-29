@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
 import { Try } from 'javascriptutilities';
-import { Connector } from 'react-base-utilities-js';
+import { Component, Connector } from 'react-base-utilities-js';
 import * as Base from './../base';
 import { Identity } from './Dependency';
 import * as InputList from '../../inputlist';
@@ -32,6 +32,10 @@ export let createDefault = (props: Props.Type): JSX.Element => {
  * @extends {Base.Component.Self<Props.Type>} Base Component extension.
  */
 export class Self extends Base.Component.Self<Props.Type> {
+  public get platform(): Readonly<Component.Platform.Case> {
+    return Component.Platform.Case.WEB;
+  }
+
   /**
    * Handle login button click.
    * @param {MouseEvent<HTMLButtonElement>} _e Click event.

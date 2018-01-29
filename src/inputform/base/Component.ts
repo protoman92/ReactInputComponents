@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { State } from 'type-safe-state-js';
+import { StateType } from 'type-safe-state-js';
+import { Component as ComponentUtil } from 'react-base-utilities-js';
 import * as InputList from './../../inputlist';
 import { ViewModel } from './Dependency';
 
@@ -19,11 +20,14 @@ export namespace Props {
  * @extends {Component<P, Self<any>>} Component implementation.
  * @template P Props type generics.
  */
-export abstract class Self<P extends Props.Type> extends Component<P, State.Self<any>> {
+export abstract class Self<P extends Props.Type> extends
+  Component<P, StateType<any>> implements
+  ComponentUtil.Custom.Type<P, StateType<any>> {
   public static get displayName(): string {
     return 'Input form';
   }
 
+  public abstract readonly platform: ComponentUtil.Platform.Case;
   protected viewModel: ViewModel.Type;
 
   public constructor(props: P) {

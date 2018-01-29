@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
 import * as enzyme from 'enzyme';
-import { ReactWrapper } from 'enzyme';
+import { ShallowWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { Numbers, Strings, Try } from 'javascriptutilities';
 import { ReduxStore as Store } from 'reactive-rx-redux-js';
@@ -35,12 +35,12 @@ describe('Input cell component should work correctly', () => {
 
   function testInputComponent<P extends BaseProps>(
     element: ReactElement<P>,
-    inputSelector: (v: ReactWrapper<P>) => ReactWrapper<any>,
+    inputSelector: (v: ShallowWrapper<P>) => ShallowWrapper<any>,
   ): void {
     /// Setup
     enzyme.configure({ adapter: new Adapter() });
     let times = 1000;
-    let rendered = enzyme.mount(element);
+    let rendered = enzyme.shallow(element);
 
     /// When & Then
     Numbers.range(0, times)
@@ -53,6 +53,19 @@ describe('Input cell component should work correctly', () => {
         expect(props.value).toBe(v);
       });
   }
+
+  // it('Native input component - should work correctly', () => {
+  //   let style: InputCell.Native.Style.ProviderType = {
+  //     inputCell: { style: () => Try.success(StyleSheet.flatten({
+  //       height: '100%',
+  //       width: '100%',
+  //     })) },
+  //   };
+
+  //   let props: InputCell.Native.Component.Props.Type = { viewModel, style };
+  //   let component = <InputCell.Native.Component.Self {...props}/>;
+  //   testInputComponent(component, v => v.childAt(0));
+  // });
 
   it('Web input component - should work correctly', () => {
     let identity: InputCell.Web.Identity.SelectorType = {

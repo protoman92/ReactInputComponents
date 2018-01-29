@@ -5,6 +5,9 @@
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "typings": "./dist/src/index.d.ts",
+  "jest": {
+    "preset": "react-native"
+  },
   "scripts": {
     "setup": "npm install",
     "build": "tsc",
@@ -33,7 +36,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.1.8",
     "@types/enzyme-adapter-react-16": "^1.0.1",
-    "@types/jest": "^21.1.6",
+    "@types/jest": "^21.1.6",    
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

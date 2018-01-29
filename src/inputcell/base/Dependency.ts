@@ -144,6 +144,10 @@ export namespace ViewModel {
     private readonly provider: Provider.Type;
     private readonly model: Model.Type;
 
+    /// Store this as an instance variable to avoid repeated calls to the model
+    /// input trigger.
+    private readonly trigger: Try<Observer<Nullable<string>>>;
+
     public get screen(): Readonly<Nullable<MVVM.Navigation.Screen.Type>> {
       return undefined;
     }
@@ -155,6 +159,7 @@ export namespace ViewModel {
     public constructor(provider: Provider.Type, model: Model.Type) {
       this.provider = provider;
       this.model = model;
+      this.trigger = model.inputTrigger();
     }
 
     public initialize = (): void => {};
@@ -176,7 +181,7 @@ export namespace ViewModel {
     }
 
     public triggerInput = (input: Nullable<string>): void => {
-      this.model.inputTrigger().map(v => v.next(input));
+      this.trigger.map(v => v.next(input));
     }
 
     public inputValueForState = (state: Readonly<Nullable<StateType<any>>>): Try<string> => {
