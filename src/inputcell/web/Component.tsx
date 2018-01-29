@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { Try } from 'javascriptutilities';
-import { State as S } from 'type-safe-state-js';
-import { Connector } from 'react-base-utilities-js';
+import { Component, Connector } from 'react-base-utilities-js';
 import * as Base from './../base';
 import { Identity } from './Dependency';
 
@@ -30,23 +29,19 @@ export let createDefault = (props: Props.Type): JSX.Element => {
 /**
  * Use this component to handle web-based inputs. Common functionalities are
  * provided by the base component.
- * @extends {Base.Component.Self<Props.Type, S.Self<any>>} Base Component extension.
+ * @extends {Base.Component.Self<Props.Type>} Base Component extension.
  */
-export class Self extends Base.Component.Self<Props.Type, S.Self<any>> {
+export class Self extends Base.Component.Self<Props.Type> {
+  public get platform(): Readonly<Component.Platform.Case> {
+    return Component.Platform.Case.WEB;
+  }
+
   /**
    * Handle text inputs by triggering state update.
    * @param {ChangeEvent<HTMLInputElement>} e Change event.
    */
   private handleTextInputEvent = (e: ChangeEvent<HTMLInputElement>): void => {
     this.handleTextInput(e.target.value);
-  }
-
-  public convertStateToTypeSafeState(state: S.Self<any>): S.Self<any> {
-    return state;
-  }
-
-  public convertTypeSafeStateToState(state: S.Self<any>): S.Self<any> {
-    return state;
   }
 
   public render(): JSX.Element {

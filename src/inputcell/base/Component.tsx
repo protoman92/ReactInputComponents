@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 import * as React from 'react';
 import { Component } from 'react';
 import { Nullable } from 'javascriptutilities';
-import { State as S } from 'type-safe-state-js';
+import { StateType } from 'type-safe-state-js';
 import { Component as ComponentUtil } from 'react-base-utilities-js';
 import { ViewModel } from './Dependency';
 
@@ -20,18 +20,18 @@ export namespace Props {
  * Base input field component that provides some common functionalities. Extend
  * this class to provide platform-specific components.
  * @extends {Component<P, S>} Component extension.
- * @implements {ComponentUtil.TypeSafeStateConvertible.Type<ST, any>} State
- * convertible implementation.
+ * @implements {ComponentUtil.Custom.Type<P, StateType<any>>} Custom component
+ * implementation.
  * @template P Props generics.
- * @template ST State generics.
  */
-export abstract class Self<P extends Props.Type, ST> extends
-  Component<P, ST> implements
-  ComponentUtil.TypeSafeStateConvertible.Type<ST, any> {
+export abstract class Self<P extends Props.Type> extends
+  Component<P, StateType<any>> implements
+  ComponentUtil.Custom.Type<P, StateType<any>> {
   public static get displayName(): string {
     return 'Input cell';
   }
 
+  public abstract readonly platform: ComponentUtil.Platform.Case;
   protected readonly viewModel: ViewModel.Type;
   private readonly subscription: Subscription;
 
@@ -42,15 +42,9 @@ export abstract class Self<P extends Props.Type, ST> extends
   }
 
   public componentWillMount(): void {
-    this.viewModel.initialize();
-
-    this.viewModel.stateStream()
-      .mapNonNilOrEmpty(v => v)
-      .map(v => this.convertTypeSafeStateToState(v))
-      .distinctUntilChanged()
-      .doOnNext(v => this.setState(v))
-      .subscribe()
-      .toBeDisposedBy(this.subscription);
+    let viewModel = this.viewModel;
+    viewModel.initialize();
+    ComponentUtil.Custom.connectState(this, viewModel, this.subscription);
   }
 
   public componentWillUnmount(): void {
@@ -71,11 +65,8 @@ export abstract class Self<P extends Props.Type, ST> extends
    * @returns {string} A string value.
    */
   protected currentInputValue = (): string => {
-    let state = this.convertStateToTypeSafeState(this.state);
-    return this.viewModel.inputValueForState(state).getOrElse('');
+    return this.viewModel.inputValueForState(this.state).getOrElse('');
   }
 
-  public abstract convertTypeSafeStateToState(state: Nullable<S.Self<any>>): ST;
-  public abstract convertStateToTypeSafeState(state: Nullable<ST>): S.Self<any>;
   public abstract render(): JSX.Element;
 }

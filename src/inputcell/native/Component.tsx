@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
 import { Nullable } from 'javascriptutilities';
-import { State as S } from 'type-safe-state-js';
+import { Component } from 'react-base-utilities-js';
 import * as Base from './../base';
 import { Style } from './Dependency';
 
@@ -17,23 +17,19 @@ export namespace Props {
 
 /**
  * Native input cell component.
- * @extends {Base.Component.Self<Props.Type, {}>} Base component extension.
+ * @extends {Base.Component.Self<Props.Type>} Base component extension.
  */
-export class Self extends Base.Component.Self<Props.Type, {}> {
+export class Self extends Base.Component.Self<Props.Type> {
+  public get platform(): Readonly<Component.Platform.Case> {
+    return Component.Platform.Case.NATIVE_COMMON;
+  }
+
   /**
    * Handle text input event.
    * @param {Nullable<string>} text A string value.
    */
   private handleTextInputEvent = (text: Nullable<string>): void => {
     this.handleTextInput(text);
-  }
-
-  public convertStateToTypeSafeState(state: Nullable<{}>): S.Self<any> {
-    return state !== undefined && state !== null ? S.fromKeyValue(state) : S.empty();
-  }
-
-  public convertTypeSafeStateToState(state: S.Self<any>): {} {
-    return state.flatten();
   }
 
   public render(): JSX.Element {

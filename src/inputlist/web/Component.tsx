@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Try } from 'javascriptutilities';
-import { Connector, Data } from 'react-base-utilities-js';
+import { State as S } from 'type-safe-state-js';
+import { Component, Connector } from 'react-base-utilities-js';
 import * as InputCell from './../../inputcell';
 import * as Base from './../base';
 import { Identity } from './Dependency';
@@ -31,11 +32,23 @@ export let createDefault = (props: Props.Type): JSX.Element => {
  * @extends {Base.Component.Self<Props.Type>} Base Component extension.
  */
 export class Self extends Base.Component.Self<Props.Type> {
-  protected createInputCell(input: Data.Input.Type): JSX.Element {
+  public get platform(): Readonly<Component.Platform.Case> {
+    return Component.Platform.Case.WEB;
+  }
+
+  protected createInputCell(vm: InputCell.Base.ViewModel.Type): JSX.Element {
+    let input = vm.inputItem;
     let identity = this.props.identity;
-    let viewModel = this.viewModel.inputCell_viewModel(input);
-    let props: InputCell.Web.Component.Props.Type = { viewModel, identity };
+    let props: InputCell.Web.Component.Props.Type = { viewModel: vm, identity };
     return <InputCell.Web.Component.Self key={input.id} {...props}/>;
+  }
+
+  public convertStateToTypeSafeState(state: S.Self<any>): S.Self<any> {
+    return state;
+  }
+
+  public convertTypeSafeStateToState(state: S.Self<any>): S.Self<any> {
+    return state;
   }
 
   public render(): JSX.Element {

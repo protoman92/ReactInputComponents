@@ -1,7 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 import { Nullable, Try } from 'javascriptutilities';
 import { ReduxStore } from 'reactive-rx-redux-js';
-import { State as S } from 'type-safe-state-js';
+import { State as S, StateType } from 'type-safe-state-js';
 import { Data, MVVM } from 'react-base-utilities-js';
 
 export namespace Action {
@@ -53,10 +53,10 @@ export namespace Model {
      * view. This way, the input component does not handle its own input, but
      * instead simply hands it over to the view model to trigger state update.
      * As a result, we have only 1 source of truth for said component.
-     * @param {Readonly<Nullable<S.Self<any>>>} state A State instance.
+     * @param {Readonly<Nullable<StateType<any>>>} state A StateType instance.
      * @returns {Try<string>} A Try string instance.
      */
-    inputValueForState(state: Readonly<Nullable<S.Self<any>>>): Try<string>;
+    inputValueForState(state: Readonly<Nullable<StateType<any>>>): Try<string>;
   }
 
   /**
@@ -105,10 +105,11 @@ export namespace Model {
       throw new Error(`Must override this for ${this}`);
     }
 
-    public inputValueForState = (state: Readonly<Nullable<S.Self<any>>>): Try<string> => {
+    public inputValueForState = (state: Readonly<Nullable<StateType<any>>>): Try<string> => {
       let path = this.inputValuePath;
 
       return Try.unwrap(state)
+        .map(v => S.fromKeyValue(v))
         .zipWith(path, (v1, v2) => v1.stringAtNode(v2))
         .flatMap(v => v);
     }
@@ -131,7 +132,7 @@ export namespace ViewModel {
     inputItem: Readonly<Data.Input.Type>;
     inputStream(): Observable<Try<string>>;
     triggerInput(input: Nullable<string>): void;
-    inputValueForState(state: Readonly<Nullable<S.Self<any>>>): Try<string>;
+    inputValueForState(state: Readonly<Nullable<StateType<any>>>): Try<string>;
   }
 
   /**
@@ -178,7 +179,7 @@ export namespace ViewModel {
       this.model.inputTrigger().map(v => v.next(input));
     }
 
-    public inputValueForState = (state: Readonly<Nullable<S.Self<any>>>): Try<string> => {
+    public inputValueForState = (state: Readonly<Nullable<StateType<any>>>): Try<string> => {
       return this.model.inputValueForState(state);
     }
   }
