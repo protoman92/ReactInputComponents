@@ -32,6 +32,8 @@ export class Self extends Base.Component.Self<Props.Type> {
       .flatMap(v => Try.unwrap(v.inputCell))
       .flatMap(v => v.properties(input));
 
+    console.log(properties);
+
     return <TextInput
       {...properties.value}
       onChangeText={this.handleTextInput.bind(this)}

@@ -1,5 +1,5 @@
 {
-  "exclude": ["dist", "test"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
