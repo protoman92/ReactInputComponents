@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
+import { Try } from 'javascriptutilities';
 import { Component } from 'react-base-utilities-js';
 import * as InputList from './../../inputlist';
 import * as Base from './../base';
-import { Style } from './Dependency';
+import { Properties, Style } from './Dependency';
 
 export namespace Props {
   /**
@@ -11,7 +12,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base props type extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    style: Style.ProviderType;
+    properties?: Readonly<Properties.ProviderType>;
+    style: Readonly<Style.ProviderType>;
   }
 }
 
@@ -25,8 +27,15 @@ export class Self extends Base.Component.Self<Props.Type> {
   }
 
   public createInputList(vm: InputList.Base.ViewModel.Type): JSX.Element {
-    let props = { viewModel: vm, style: this.props.style };
-    return <InputList.Native.Component.Self {...props}/>;
+    let props = this.props;
+
+    let listProps = {
+      viewModel: vm,
+      properties: props.properties,
+      style: props.style,
+    };
+
+    return <InputList.Native.Component.Self {...listProps}/>;
   }
 
   public render(): JSX.Element {
@@ -34,17 +43,25 @@ export class Self extends Base.Component.Self<Props.Type> {
     let header = viewModel.inputHeader;
     let style = this.props.style.inputForm;
 
+    let properties = Try.unwrap(this.props.properties)
+      .flatMap(v => Try.unwrap(v.inputForm));
+
     return (
-      <View style={style.containerStyle(header).value}>
+      <View
+        {...properties.flatMap(v => v.containerProperties(header)).value}
+        style={style.containerStyle(header).value}>
         {this.createInputListComponent()}
         <TouchableOpacity
+          {...properties.flatMap(v => v.buttonProperties(header)).value}
           onPress={this.handleConfirmButtonClick.bind(this)}
           style={style.buttonStyle(header).value}>
-          <Text style={style.buttonTextStyle(header).value}>
+          <Text
+            {...properties.flatMap(v => v.buttonTextProperties(header)).value}
+            style={style.buttonTextStyle(header).value}>
             {header.confirmTitle}
           </Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }

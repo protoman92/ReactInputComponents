@@ -1,6 +1,29 @@
-import { TextStyle } from 'react-native';
+import { TextInputProperties, TextStyle } from 'react-native';
 import { Try } from 'javascriptutilities';
 import { Data } from 'react-base-utilities-js';
+
+export namespace Properties {
+  /**
+   * Represent props, other than style for an input cell. Beware that this is
+   * the props for the inner input component, not the wrapping component.
+   * @extends {TextInputProperties} TextInputProperties extension.
+   */
+  export interface Type extends TextInputProperties {}
+
+  /**
+   * Props selector for an input cell component. 
+   */
+  export interface SelectorType {
+    properties(input: Data.Input.Type): Try<Type>;
+  }
+
+  /**
+   * Provide an input cell props selector.
+   */
+  export interface ProviderType {
+    inputCell?: Readonly<SelectorType>;
+  }
+}
 
 export namespace Style {
   /**

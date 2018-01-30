@@ -1,3 +1,3 @@
 import * as Component from './Component';
-import { Style } from './Dependency';
-export { Component, Style };
+import { Properties, Style } from './Dependency';
+export { Component, Properties, Style };

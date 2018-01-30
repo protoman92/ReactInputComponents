@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
+import { Try } from 'javascriptutilities';
 import { Component, Data } from 'react-base-utilities-js';
 import * as InputCell from './../../inputcell';
 import * as Base from './../base';
-import { Style } from './Dependency';
+import { Properties, Style } from './Dependency';
 
 export namespace Props {
   /**
@@ -11,7 +12,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    style: Style.ProviderType;
+    properties?: Readonly<Properties.ProviderType>;
+    style: Readonly<Style.ProviderType>;
   }
 }
 
@@ -26,8 +28,15 @@ export class Self extends Base.Component.Self<Props.Type> {
   }
 
   protected createInputCell(vm: InputCell.Base.ViewModel.Type): JSX.Element {
-    let props = { viewModel: vm, style: this.props.style };
-    return <InputCell.Native.Component.Self {...props}/>;
+    let props = this.props;
+
+    let cellProps = {
+      viewModel: vm,
+      properties: props.properties,
+      style: props.style,
+    };
+
+    return <InputCell.Native.Component.Self {...cellProps}/>;
   }
 
   /**
@@ -51,7 +60,12 @@ export class Self extends Base.Component.Self<Props.Type> {
     let viewModel = this.viewModel;
     let inputs = viewModel.inputItems.map(v => v);
 
+    let properties = Try.unwrap(this.props.properties)
+      .flatMap(v => Try.unwrap(v.inputList))
+      .flatMap(v => v.properties(inputs));
+
     return <FlatList
+      {...properties.value}
       data={inputs}
       keyExtractor={this.keyExtractor.bind(this)}
       renderItem={this.renderItem.bind(this)}

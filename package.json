@@ -1,5 +1,5 @@
 {
-  "name": "react-input-components",
+  "name": "react-basic-input-components",
   "version": "1.0.0",
   "description": "MVVM-based input components for React applications.",
   "main": "./dist/src/index.js",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.1.8",
     "@types/enzyme-adapter-react-16": "^1.0.1",
-    "@types/jest": "^21.1.6",    
+    "@types/jest": "^21.1.6",
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

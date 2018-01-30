@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
+import { Try } from 'javascriptutilities';
 import { Component } from 'react-base-utilities-js';
 import * as Base from './../base';
-import { Style } from './Dependency';
+import { Properties, Style } from './Dependency';
 
 export namespace Props {
   /**
@@ -10,7 +11,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    style: Style.ProviderType;
+    properties?: Readonly<Properties.ProviderType>;
+    style: Readonly<Style.ProviderType>;
   }
 }
 
@@ -26,7 +28,12 @@ export class Self extends Base.Component.Self<Props.Type> {
   public render(): JSX.Element {
     let input = this.viewModel.inputItem;
 
+    let properties = Try.unwrap(this.props.properties)
+      .flatMap(v => Try.unwrap(v.inputCell))
+      .flatMap(v => v.properties(input));
+
     return <TextInput
+      {...properties.value}
       onChangeText={this.handleTextInput.bind(this)}
       style={this.props.style.inputCell.style(input).value}
       value={this.currentInputValue()}/>;
