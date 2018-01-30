@@ -1,5 +1,4 @@
 import { Observable, Observer } from 'rxjs';
-import { Try } from 'javascriptutilities';
 import { Data, MVVM } from 'react-base-utilities-js';
 import * as InputList from './../../inputlist';
 
@@ -16,7 +15,7 @@ export namespace Model {
    * Provide model for an input form view model.
    */
   export interface ProviderType {
-    inputForm_model(inputs: Data.Input.Header): Try<Type>;
+    inputForm_model(header: Data.Input.Header): Type;
   }
 
   /**
@@ -49,7 +48,7 @@ export namespace ViewModel {
    * Provide view model for an input form component.
    */
   export interface ProviderType {
-    inputForm_viewModel(inputs: Data.Input.Header): Try<Type>;
+    inputForm_viewModel(header: Data.Input.Header): Type;
   }
 
   /**
