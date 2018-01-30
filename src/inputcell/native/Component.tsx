@@ -7,7 +7,7 @@ import { Properties, Style } from './Dependency';
 
 export namespace Props {
   /**
-   * Props type for native input cell component.
+   * Props type for a native input cell component.
    * @extends {Base.Component.Props.Type} Base component extension.
    */
   export interface Type extends Base.Component.Props.Type {
@@ -31,8 +31,6 @@ export class Self extends Base.Component.Self<Props.Type> {
     let properties = Try.unwrap(this.props.properties)
       .flatMap(v => Try.unwrap(v.inputCell))
       .flatMap(v => v.properties(input));
-
-    console.log(properties);
 
     return <TextInput
       {...properties.value}
