@@ -74,7 +74,7 @@ export namespace ViewModel {
     private readonly provider: Provider.Type;
     private readonly model: Model.Type;
 
-    public get screen(): Readonly<Nullable<MVVM.Navigation.Screen.Type>> {
+    public get screen(): Readonly<Nullable<MVVM.Navigation.Screen.BaseType>> {
       return undefined;
     }
 

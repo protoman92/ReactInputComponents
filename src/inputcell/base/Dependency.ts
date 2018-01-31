@@ -148,7 +148,7 @@ export namespace ViewModel {
     /// input trigger.
     private readonly trigger: Try<Observer<Nullable<string>>>;
 
-    public get screen(): Readonly<Nullable<MVVM.Navigation.Screen.Type>> {
+    public get screen(): Readonly<Nullable<MVVM.Navigation.Screen.BaseType>> {
       return undefined;
     }
 
