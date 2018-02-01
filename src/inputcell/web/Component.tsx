@@ -12,7 +12,7 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends React.Attributes, Base.Component.Props.Type {
-    identity?: Readonly<Identity.ProviderType>;
+    identityProvider?: Readonly<Identity.ProviderType>;
   }
 }
 
@@ -49,7 +49,7 @@ export class Self extends Base.Component.Self<Props.Type> {
     let viewModel = this.viewModel;
     let input = viewModel.inputItem;
 
-    let identity = Try.unwrap(props.identity)
+    let identity = Try.unwrap(props.identityProvider)
       .flatMap(v => Try.unwrap(v.inputCell))
       .flatMap(v => v.identity(input));
 

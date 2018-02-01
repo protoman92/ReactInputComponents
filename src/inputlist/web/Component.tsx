@@ -13,7 +13,7 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base props type extension.
    */
   export interface Type extends React.Attributes, Base.Component.Props.Type {
-    identity?: Readonly<Identity.ProviderType>;
+    identityProvider?: Readonly<Identity.ProviderType>;
   }
 }
 
@@ -38,8 +38,8 @@ export class Self extends Base.Component.Self<Props.Type> {
 
   protected createInputCell(vm: InputCell.Base.ViewModel.Type): JSX.Element {
     let input = vm.inputItem;
-    let identity = this.props.identity;
-    let props: InputCell.Web.Component.Props.Type = { viewModel: vm, identity };
+    let identityProvider = this.props.identityProvider;
+    let props: InputCell.Web.Component.Props.Type = { viewModel: vm, identityProvider };
     return <InputCell.Web.Component.Self key={input.id} {...props}/>;
   }
 
@@ -54,7 +54,7 @@ export class Self extends Base.Component.Self<Props.Type> {
   public render(): JSX.Element {
     let inputs = this.viewModel.inputItems;
 
-    let identity = Try.unwrap(this.props.identity)
+    let identity = Try.unwrap(this.props.identityProvider)
       .flatMap(v => Try.unwrap(v.inputList))
       .flatMap(v => v.identity(inputs));
 

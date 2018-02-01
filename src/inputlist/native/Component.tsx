@@ -12,8 +12,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    properties?: Readonly<Properties.ProviderType>;
-    style: Readonly<Style.ProviderType>;
+    propertiesProvider?: Readonly<Properties.ProviderType>;
+    styleProvider: Readonly<Style.ProviderType>;
   }
 }
 
@@ -32,8 +32,8 @@ export class Self extends Base.Component.Self<Props.Type> {
 
     let cellProps = {
       viewModel: vm,
-      properties: props.properties,
-      style: props.style,
+      propertiesProvider: props.propertiesProvider,
+      styleProvider: props.styleProvider,
     };
 
     return <InputCell.Native.Component.Self {...cellProps}/>;
@@ -60,7 +60,7 @@ export class Self extends Base.Component.Self<Props.Type> {
     let viewModel = this.viewModel;
     let inputs = viewModel.inputItems.map(v => v);
 
-    let properties = Try.unwrap(this.props.properties)
+    let properties = Try.unwrap(this.props.propertiesProvider)
       .flatMap(v => Try.unwrap(v.inputList))
       .flatMap(v => v.properties(inputs));
 
@@ -69,6 +69,6 @@ export class Self extends Base.Component.Self<Props.Type> {
       data={inputs}
       keyExtractor={this.keyExtractor.bind(this)}
       renderItem={this.renderItem.bind(this)}
-      style={this.props.style.inputList.style(inputs).value}/>;
+      style={this.props.styleProvider.inputList.style(inputs).value}/>;
   }
 }

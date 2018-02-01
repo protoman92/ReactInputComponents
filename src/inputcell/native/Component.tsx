@@ -11,8 +11,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    properties?: Readonly<Properties.ProviderType>;
-    style: Readonly<Style.ProviderType>;
+    propertiesProvider?: Readonly<Properties.ProviderType>;
+    styleProvider: Readonly<Style.ProviderType>;
   }
 }
 
@@ -28,14 +28,14 @@ export class Self extends Base.Component.Self<Props.Type> {
   public render(): JSX.Element {
     let input = this.viewModel.inputItem;
 
-    let properties = Try.unwrap(this.props.properties)
+    let properties = Try.unwrap(this.props.propertiesProvider)
       .flatMap(v => Try.unwrap(v.inputCell))
       .flatMap(v => v.properties(input));
 
     return <TextInput
       {...properties.value}
       onChangeText={this.handleTextInput.bind(this)}
-      style={this.props.style.inputCell.style(input).value}
+      style={this.props.styleProvider.inputCell.style(input).value}
       value={this.currentInputValue()}/>;
   }
 }

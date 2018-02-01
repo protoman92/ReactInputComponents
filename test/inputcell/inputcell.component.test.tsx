@@ -54,19 +54,6 @@ describe('Input cell component should work correctly', () => {
       });
   }
 
-  // it('Native input component - should work correctly', () => {
-  //   let style: InputCell.Native.Style.ProviderType = {
-  //     inputCell: { style: () => Try.success(StyleSheet.flatten({
-  //       height: '100%',
-  //       width: '100%',
-  //     })) },
-  //   };
-
-  //   let props: InputCell.Native.Component.Props.Type = { viewModel, style };
-  //   let component = <InputCell.Native.Component.Self {...props}/>;
-  //   testInputComponent(component, v => v.childAt(0));
-  // });
-
   it('Web input component - should work correctly', () => {
     let identity: InputCell.Web.Identity.SelectorType = {
       identity: () => Try.success({
@@ -80,7 +67,7 @@ describe('Input cell component should work correctly', () => {
 
     let props: InputCell.Web.Component.Props.Type = {
       viewModel,
-      identity: identityProvider,
+      identityProvider: identityProvider,
     };
 
     let component = <InputCell.Web.Component.Self {...props}/>;
