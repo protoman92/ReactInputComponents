@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { Try } from 'javascriptutilities';
+import { State as S } from 'type-safe-state-js';
 import { Component, Connector } from 'react-base-utilities-js';
 import * as Base from './../base';
 import { Identity } from './Dependency';
@@ -12,7 +13,7 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends React.Attributes, Base.Component.Props.Type {
-    identityProvider?: Readonly<Identity.ProviderType>;
+    readonly identityProvider?: Readonly<Identity.ProviderType>;
   }
 }
 
@@ -48,6 +49,7 @@ export class Self extends Base.Component.Self<Props.Type> {
     let props = this.props;
     let viewModel = this.viewModel;
     let input = viewModel.inputItem;
+    let state = S.fromKeyValue(this.state);
 
     let identity = Try.unwrap(props.identityProvider)
       .flatMap(v => Try.unwrap(v.inputCell))
@@ -58,7 +60,7 @@ export class Self extends Base.Component.Self<Props.Type> {
         {...identity.value}
         onChange={this.handleTextInputEvent.bind(this)}
         placeholder={input.placeholder}
-        value={this.currentInputValue()}/>
+        value={this.currentInputValue(state)}/>
     );
   }
 }

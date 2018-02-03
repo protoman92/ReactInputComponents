@@ -47,6 +47,6 @@ export namespace Style {
    * extension.
    */
   export interface ProviderType extends InputCell.Native.Style.ProviderType {
-    inputList: SelectorType;
+    readonly inputList: SelectorType;
   }
 }

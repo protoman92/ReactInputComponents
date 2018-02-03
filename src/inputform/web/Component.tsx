@@ -13,7 +13,7 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends React.Attributes, Base.Component.Props.Type {
-    identityProvider?: Readonly<Identity.ProviderType>;
+    readonly identityProvider?: Readonly<Identity.ProviderType>;
   }
 }
 

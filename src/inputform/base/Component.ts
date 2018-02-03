@@ -11,7 +11,7 @@ export namespace Props {
    * @extends {React.Attributes} React attributes extension.
    */
   export interface Type extends React.Attributes {
-    viewModel: Readonly<ViewModel.Type>;
+    readonly viewModel: Readonly<ViewModel.Type>;
   }
 }
 

@@ -12,8 +12,8 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component props extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    propertiesProvider?: Readonly<Properties.ProviderType>;
-    styleProvider: Readonly<Style.ProviderType>;
+    readonly propertiesProvider?: Readonly<Properties.ProviderType>;
+    readonly styleProvider: Readonly<Style.ProviderType>;
   }
 }
 

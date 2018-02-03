@@ -23,7 +23,7 @@ export namespace Action {
    * @extends {Base.Action.ProviderType} Base provider extension.
    */
   export interface ProviderType extends Base.Action.ProviderType {
-    inputCell: CreatorType;
+    readonly inputCell: CreatorType;
   }
 
   /**
@@ -64,7 +64,7 @@ export namespace Reducer {
    * @returns {DispatchReducer<any>} A DispatchReducer instance.
    */
   export let createDefault = (): DispatchReducer<any> => {
-    return (state: S.Self<any>, action: ActionType<any>): S.Self<any> => {
+    return (state: S.Type<any>, action: ActionType<any>): S.Type<any> => {
       switch (action.id) {
         case Action.UPDATE_INPUT_VALUE:
           return state.updatingValue(action.fullValuePath, action.payload);
@@ -82,8 +82,8 @@ export namespace Provider {
    * @extends {Base.Provider.Type} Base provider extension.
    */
   export interface Type extends Base.Provider.Type {
-    action: Action.ProviderType;
-    store: ReduxStore.Dispatch.Type;
+    readonly action: Action.ProviderType;
+    readonly store: ReduxStore.Dispatch.Type;
   }
 }
 
@@ -134,7 +134,7 @@ export namespace Model {
       return this.baseModel.inputStream();
     }
 
-    public inputValueForState = (state: S.Self<any>): Try<string> => {
+    public inputValueForState = (state: S.Type<any>): Try<string> => {
       return this.baseModel.inputValueForState(state);
     }
   }

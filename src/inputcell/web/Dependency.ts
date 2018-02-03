@@ -7,7 +7,7 @@ export namespace Identity {
    * @extends {Component.Web.Identity.Type} Common identity extension.
    */
   export interface Type extends Component.Web.Identity.Type {
-    type: Data.InputType.Web.Case;
+    readonly type: Data.InputType.Web.Case;
   }
 
   /**
@@ -21,6 +21,6 @@ export namespace Identity {
    * Provide identity selector for input cell.
    */
   export interface ProviderType {
-    inputCell?: SelectorType;
+    readonly inputCell?: SelectorType;
   }
 }

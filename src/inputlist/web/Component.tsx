@@ -43,11 +43,11 @@ export class Self extends Base.Component.Self<Props.Type> {
     return <InputCell.Web.Component.Self key={input.id} {...props}/>;
   }
 
-  public convertStateToTypeSafeState(state: S.Self<any>): S.Self<any> {
+  public convertStateToTypeSafeState(state: S.Type<any>): S.Type<any> {
     return state;
   }
 
-  public convertTypeSafeStateToState(state: S.Self<any>): S.Self<any> {
+  public convertTypeSafeStateToState(state: S.Type<any>): S.Type<any> {
     return state;
   }
 

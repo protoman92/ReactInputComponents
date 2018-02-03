@@ -21,7 +21,7 @@ export namespace Properties {
    * Provide an input cell props selector.
    */
   export interface ProviderType {
-    inputCell?: Readonly<SelectorType>;
+    readonly inputCell?: Readonly<SelectorType>;
   }
 }
 
@@ -44,6 +44,6 @@ export namespace Style {
    * Provide an input cell style selector.
    */
   export interface ProviderType {
-    inputCell: SelectorType;
+    readonly inputCell: SelectorType;
   }
 }

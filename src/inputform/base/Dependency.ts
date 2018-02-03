@@ -23,7 +23,7 @@ export namespace Model {
    * @extends {InputList.Base.Model.ProviderType} Input list model provider extension.
    */
   export interface Type extends InputList.Base.Model.ProviderType {
-    inputHeader: Readonly<Data.Input.Header>;
+    readonly inputHeader: Readonly<Data.Input.Header>;
   }
 
   /**
@@ -60,7 +60,7 @@ export namespace ViewModel {
   export interface Type extends
     MVVM.Confirm.ViewModel.Type,
     InputList.Base.ViewModel.ProviderType {
-    inputHeader: Readonly<Data.Input.Header>;
+    readonly inputHeader: Readonly<Data.Input.Header>;
     triggerConfirm(): void;
   }
 

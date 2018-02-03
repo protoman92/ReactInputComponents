@@ -7,8 +7,7 @@ export namespace Provider {
    * Provide the necessary dependencies for an input list component.
    * @extends {InputCell.Base.Provider.Type} Input cell provider extension.
    */
-  export interface Type extends InputCell.Base.Provider.Type {
-  }
+  export interface Type extends InputCell.Base.Provider.Type {}
 }
 
 export namespace Model {
@@ -25,7 +24,7 @@ export namespace Model {
    * extension.
    */
   export interface Type extends InputCell.Base.Model.ProviderType {
-    inputItems: Readonly<Data.Input.Type[]>;
+    readonly inputItems: Readonly<Data.Input.Type[]>;
   }
 
   /**
@@ -63,7 +62,7 @@ export namespace ViewModel {
    * extension.
    */
   export interface Type extends MVVM.ViewModel.Type, InputCell.Base.ViewModel.ProviderType {
-    inputItems: Readonly<Data.Input.Type[]>;
+    readonly inputItems: Readonly<Data.Input.Type[]>;
   }
 
   /**

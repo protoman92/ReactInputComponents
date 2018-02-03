@@ -22,6 +22,6 @@ export namespace Identity {
    * extension.
    */
   export interface ProviderType extends InputCell.Web.Identity.ProviderType {
-    inputList?: SelectorType;
+    readonly inputList?: SelectorType;
   }
 }

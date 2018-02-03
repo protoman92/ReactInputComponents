@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
 import { Try } from 'javascriptutilities';
+import { State as S } from 'type-safe-state-js';
 import { Component } from 'react-base-utilities-js';
 import * as Base from './../base';
 import { Properties, Style } from './Dependency';
@@ -11,14 +12,14 @@ export namespace Props {
    * @extends {Base.Component.Props.Type} Base component extension.
    */
   export interface Type extends Base.Component.Props.Type {
-    propertiesProvider?: Readonly<Properties.ProviderType>;
-    styleProvider: Readonly<Style.ProviderType>;
+    readonly propertiesProvider?: Readonly<Properties.ProviderType>;
+    readonly styleProvider: Readonly<Style.ProviderType>;
   }
 }
 
 /**
  * Native input cell component.
- * @extends {Base.Component.Self<Props.Type>} Base component extension.
+ * @extends {Base.Component.Type<Props.Type>} Base component extension.
  */
 export class Self extends Base.Component.Self<Props.Type> {
   public get platform(): Readonly<Component.Platform.Case> {
@@ -27,6 +28,7 @@ export class Self extends Base.Component.Self<Props.Type> {
 
   public render(): JSX.Element {
     let input = this.viewModel.inputItem;
+    let state = S.fromKeyValue(this.state);
 
     let properties = Try.unwrap(this.props.propertiesProvider)
       .flatMap(v => Try.unwrap(v.inputCell))
@@ -36,6 +38,6 @@ export class Self extends Base.Component.Self<Props.Type> {
       {...properties.value}
       onChangeText={this.handleTextInput.bind(this)}
       style={this.props.styleProvider.inputCell.style(input).value}
-      value={this.currentInputValue()}/>;
+      value={this.currentInputValue(state)}/>;
   }
 }

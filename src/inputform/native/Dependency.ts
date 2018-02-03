@@ -28,7 +28,7 @@ export namespace Properties {
   export interface ProviderType extends
     TouchableButton.Properties.ProviderType,
     InputList.Native.Properties.ProviderType {
-    inputForm?: Readonly<SelectorType>;
+    readonly inputForm?: Readonly<SelectorType>;
   }
 }
 
@@ -56,6 +56,6 @@ export namespace Style {
   export interface ProviderType extends
     TouchableButton.Style.ProviderType,
     InputList.Native.Style.ProviderType {
-    inputForm: SelectorType;
+    readonly inputForm: SelectorType;
   }
 }

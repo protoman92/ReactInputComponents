@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 import * as React from 'react';
 import { Component } from 'react';
 import { Nullable } from 'javascriptutilities';
-import { StateType } from 'type-safe-state-js';
+import { State as S, StateType } from 'type-safe-state-js';
 import { Component as ComponentUtil } from 'react-base-utilities-js';
 import { ViewModel } from './Dependency';
 
@@ -12,7 +12,7 @@ export namespace Props {
    * @extends {React.Attributes} React attributes extension.
    */
   export interface Type extends React.Attributes {
-    viewModel: Readonly<ViewModel.Type>;
+    readonly viewModel: Readonly<ViewModel.Type>;
   }
 }
 
@@ -62,10 +62,11 @@ export abstract class Self<P extends Props.Type> extends
 
   /**
    * Get the current input value.
+   * @param {S.Type<any>} state A State instance.
    * @returns {string} A string value.
    */
-  protected currentInputValue = (): string => {
-    return this.viewModel.inputValueForState(this.state).getOrElse('');
+  protected currentInputValue = (state: S.Type<any>): string => {
+    return this.viewModel.inputValueForState(state).getOrElse('');
   }
 
   public abstract render(): JSX.Element;

@@ -18,7 +18,7 @@ export namespace Action {
    * Provide action for rx store-based view model.
    */
   export interface ProviderType {
-    inputCell: Type;
+    readonly inputCell: Type;
   }
 }
 
@@ -49,7 +49,7 @@ export namespace Provider {
    * Provide the relevant dependencies for rx store-based view model.
    */
   export interface Type extends ReduxStore.Provider.Type {
-    action: Readonly<Action.ProviderType>;
+    readonly action: Readonly<Action.ProviderType>;
   }
 }
 
@@ -93,7 +93,7 @@ export namespace Model {
       return this.provider.action.inputCell.valueTrigger(this.inputItem);
     }
 
-    public inputValueForState = (state: Readonly<Nullable<S.Self<any>>>): Try<string> => {
+    public inputValueForState = (state: Readonly<Nullable<S.Type<any>>>): Try<string> => {
       return this.baseModel.inputValueForState(state);
     }
   }
