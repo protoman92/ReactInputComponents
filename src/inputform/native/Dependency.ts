@@ -15,7 +15,7 @@ export namespace Properties {
    * Properties selector for a native input form component.
    */
   export interface SelectorType {
-    containerProperties(header: Data.Input.Header): Try<ContainerType>;
+    containerProperties?(header: Data.Input.Header): Try<ContainerType>;
   }
 
   /**

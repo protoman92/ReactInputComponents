@@ -1,6 +1,6 @@
 {
   "name": "react-basic-input-components",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "MVVM-based input components for React applications.",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",

@@ -32,7 +32,8 @@ export class Self extends Base.Component.Self<Props.Type> {
 
     let properties = Try.unwrap(this.props.propertiesProvider)
       .flatMap(v => Try.unwrap(v.inputCell))
-      .flatMap(v => v.properties(input));
+      .flatMap(v => Try.unwrap(v.properties))
+      .flatMap(v => v(input));
 
     return <TextInput
       {...properties.value}

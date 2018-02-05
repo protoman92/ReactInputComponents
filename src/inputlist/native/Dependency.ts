@@ -14,7 +14,7 @@ export namespace Properties {
    * Select the appropriate properties based on the input items.
    */
   export interface SelectorType {
-    properties(inputs: Data.Input.Type[]): Try<Type>;
+    properties?(inputs: Data.Input.Type[]): Try<Type>;
   }
 
   /**

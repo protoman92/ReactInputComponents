@@ -58,7 +58,9 @@ export class Self extends Base.Component.Self<Props.Type> {
 
     return (
       <View
-        {...properties.flatMap(v => v.containerProperties(header)).value}
+        {...properties
+          .flatMap(v => Try.unwrap(v.containerProperties))
+          .flatMap(v => v(header)).value}
         style={style.containerStyle(header).value}>
         {this.createInputListComponent()}
         <TouchableButton.Component.Self {...buttonProps}/>

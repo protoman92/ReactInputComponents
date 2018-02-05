@@ -62,7 +62,8 @@ export class Self extends Base.Component.Self<Props.Type> {
 
     let properties = Try.unwrap(this.props.propertiesProvider)
       .flatMap(v => Try.unwrap(v.inputList))
-      .flatMap(v => v.properties(inputs));
+      .flatMap(v => Try.unwrap(v.properties))
+      .flatMap(v => v(inputs));
 
     return <FlatList
       {...properties.value}

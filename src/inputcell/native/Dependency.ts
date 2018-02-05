@@ -14,7 +14,7 @@ export namespace Properties {
    * Props selector for an input cell component. 
    */
   export interface SelectorType {
-    properties(input: Data.Input.Type): Try<Type>;
+    properties?(input: Data.Input.Type): Try<Type>;
   }
 
   /**
